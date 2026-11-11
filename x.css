@@ -1,0 +1,122 @@
+/* Пудра: палитра со скрина (пудровый розовый, крем, розово-коричневый) + изюминки с доски Pinterest */
+:root { --bar-h: 64px; --x-script: "Marck Script", "Cormorant Garamond", cursive; --x-serif: "Cormorant Garamond", Georgia, serif; --x-ease: cubic-bezier(.2, .8, .2, 1); --x-rose: #b87074; --x-glow: color-mix(in srgb, var(--c-accent) 38%, transparent); }
+html { scroll-padding-top: calc(var(--bar-h) + 12px); scroll-behavior: smooth; }
+body { padding-top: var(--bar-h); background: radial-gradient(circle at 85% -5%, #f1bcb4 0, transparent 44%), radial-gradient(circle at 0 30%, #f0d8c8 0, transparent 40%), var(--c-canvas); background-attachment: fixed; }
+
+/* ---------- закреплённое меню ---------- */
+.s-bar { position: fixed; top: 0; left: 0; right: 0; min-height: var(--bar-h); z-index: 60; background: color-mix(in srgb, var(--c-canvas) 72%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); border-bottom: 1px solid var(--hair); }
+.s-bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, transparent, var(--x-rose), transparent); transform: scaleX(var(--sp, 0)); transform-origin: 0 50%; pointer-events: none; }
+.s-bar__nav { display: flex; gap: clamp(12px, 1.8vw, 26px); margin-left: auto; margin-right: clamp(10px, 2vw, 26px); }
+.s-bar__nav a { position: relative; color: var(--c-ink); text-decoration: none; font-weight: 500; font-size: .9rem; padding: 8px 0; opacity: .82; transition: opacity .2s; }
+.s-bar__nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: var(--c-accent); transform: scaleX(0); transform-origin: right; transition: transform .35s var(--x-ease); }
+.s-bar__nav a:hover, .s-bar__nav a.is-on { opacity: 1; }
+.s-bar__nav a:hover::after, .s-bar__nav a.is-on::after { transform: scaleX(1); transform-origin: left; }
+.s-bar__burger { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--hair); background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
+.s-bar__burger span, .s-bar__burger span::before, .s-bar__burger span::after { content: ""; position: absolute; left: 12px; width: 20px; height: 2px; background: var(--c-ink); border-radius: 2px; transition: transform .3s var(--x-ease), background .2s; }
+.s-bar__burger span { top: 21px; } .s-bar__burger span::before { left: 0; top: -6px; } .s-bar__burger span::after { left: 0; top: 6px; }
+.s-bar.is-open .s-bar__burger span { background: transparent; }
+.s-bar.is-open .s-bar__burger span::before { transform: translateY(6px) rotate(45deg); }
+.s-bar.is-open .s-bar__burger span::after { transform: translateY(-6px) rotate(-45deg); }
+@media (max-width: 1100px) { .s-bar__tel { display: none; } }
+@media (max-width: 1000px) {
+  .s-bar__burger { display: block; }
+  .s-bar__nav { display: none; position: absolute; top: 100%; left: 0; right: 0; margin: 0; flex-direction: column; gap: 0; padding: 6px var(--gut) 14px; background: color-mix(in srgb, var(--c-canvas) 96%, transparent); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-bottom: 1px solid var(--hair); }
+  .s-bar.is-open .s-bar__nav { display: flex; }
+  .s-bar__nav a { min-height: 50px; display: flex; align-items: center; font-size: 1.05rem; border-bottom: 1px solid var(--hair); }
+  .s-bar__nav a:last-child { border-bottom: 0; }
+  .s-bar__nav a::after { display: none; }
+}
+@media (max-width: 640px) { .s-bar .s-btn--sm { font-size: .78rem; padding: 0 .9em; white-space: nowrap; } }
+
+/* ---------- первый экран: контурное «Пудра» ---------- */
+.s-eyebrow { color: var(--c-accent-deep); }
+.x-big { position: absolute; z-index: 2; left: 3%; bottom: -4%; font: italic 500 clamp(7rem, 21vw, 18rem)/.85 var(--x-serif); letter-spacing: -.02em; color: transparent; -webkit-text-stroke: 1.4px rgb(150 80 79 / .32); pointer-events: none; user-select: none; white-space: nowrap; }
+@media (max-width: 960px) { .x-big { font-size: 28vw; left: 2%; bottom: 3%; } }
+
+/* ---------- стеклянные карточки ---------- */
+.s-widget, .s-board__group, .s-incl > div, .s-promises li, .s-reviews li, .s-steps__item, .s-faq details { background: color-mix(in srgb, #fff 46%, transparent) !important; -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); border: 1px solid color-mix(in srgb, #fff 80%, transparent) !important; border-radius: 24px !important; box-shadow: 0 14px 34px -18px rgb(96 46 47 / .28); transition: transform .35s var(--x-ease), border-color .3s, box-shadow .3s; }
+.s-widget { background: color-mix(in srgb, #fff 68%, transparent) !important; box-shadow: 0 30px 60px -26px rgb(96 46 47 / .4); }
+.s-board__group { padding: 22px 24px; }
+.s-board__group:hover, .s-promises li:hover, .s-reviews li:hover, .s-steps__item:hover, .s-incl > div:hover { transform: translateY(-6px); border-color: var(--x-rose) !important; box-shadow: 0 22px 44px -18px rgb(96 46 47 / .4); }
+
+/* ---------- микро-взаимодействия кнопок ---------- */
+.s-btn { position: relative; overflow: hidden; transition: transform .25s var(--x-ease), box-shadow .25s var(--x-ease), background .25s; }
+.s-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 26px -8px var(--x-glow); }
+.s-btn:active { transform: scale(.95); transition-duration: .08s; }
+.s-btn::after { content: ""; position: absolute; top: 0; left: -70%; width: 45%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent); transform: skewX(-20deg); transition: left .6s var(--x-ease); pointer-events: none; }
+.s-btn:hover::after { left: 130%; }
+.x-ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, .55); transform: scale(0); animation: x-rip .6s ease-out forwards; pointer-events: none; }
+@keyframes x-rip { to { transform: scale(4); opacity: 0; } }
+
+/* ---------- подбор цены по длине волос ---------- */
+.x-pick { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 22px; align-items: center; margin-bottom: 22px; padding: clamp(18px, 3vw, 30px); border-radius: 28px; background: linear-gradient(135deg, color-mix(in srgb, var(--x-rose) 30%, #fff), color-mix(in srgb, #fff 60%, transparent)); border: 1px solid color-mix(in srgb, var(--x-rose) 45%, #fff); }
+.x-pick h3 { font: italic 600 clamp(1.5rem, 2.4vw, 2rem)/1.1 var(--x-serif); margin-bottom: 6px; }
+.x-pick__hint { font-family: var(--x-script); font-size: 1.25rem; color: var(--c-accent); margin-bottom: 14px; }
+.x-pick__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.x-pick__chips button { font: 500 .92rem/1 var(--f-text); padding: 12px 17px; border-radius: 999px; background: color-mix(in srgb, #fff 70%, transparent); color: var(--c-ink); border: 1px solid color-mix(in srgb, var(--x-rose) 60%, #fff); cursor: pointer; transition: transform .2s var(--x-ease), background .25s, color .25s; }
+.x-pick__chips button:hover { transform: translateY(-2px); }
+.x-pick__chips button:active { transform: scale(.92); }
+.x-pick__chips button[aria-pressed="true"] { background: var(--c-accent); color: var(--c-accent-ink); border-color: var(--c-accent); }
+.x-pick__out { display: flex; align-items: center; gap: 22px; justify-content: flex-end; }
+.x-pick__fig { width: 96px; height: 120px; flex: none; color: var(--c-accent); }
+.x-pick__fig .hair { transition: height .5s var(--x-ease), y .5s var(--x-ease); }
+.x-pick__sum { display: grid; gap: 12px; }
+.x-pick__sum div b { display: block; font: 800 clamp(1.4rem, 2.6vw, 2rem)/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.x-pick__sum div span { display: block; margin-top: 4px; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c-ink-soft); }
+@media (max-width: 760px) { .x-pick { grid-template-columns: 1fr; } .x-pick__out { justify-content: flex-start; } }
+
+/* ---------- советы по уходу: нумерованные карточки с круглыми фото (скрин-референс) ---------- */
+.x-tips__title { display: grid; gap: 6px; }
+.x-tips__title h2 { font: italic 600 clamp(2.2rem, 5vw, 3.8rem)/1.02 var(--x-serif); }
+.x-tips__title p { font-family: var(--x-script); font-size: 1.5rem; color: var(--c-accent); }
+.x-tips__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.x-tip { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 18px 26px; align-items: center; padding: clamp(20px, 3vw, 30px); border-radius: 30px; background: linear-gradient(135deg, color-mix(in srgb, var(--x-rose) 26%, #fff), color-mix(in srgb, #fff 80%, #efc4ba)); border: 1px solid color-mix(in srgb, #fff 85%, transparent); box-shadow: 0 18px 40px -22px rgb(96 46 47 / .45); transition: transform .35s var(--x-ease), box-shadow .35s; overflow: hidden; }
+.x-tip:hover { transform: translateY(-5px); box-shadow: 0 26px 50px -22px rgb(96 46 47 / .55); }
+.x-tip__head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.x-tip__num { flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font: 600 1.7rem/1 var(--x-serif); color: var(--c-accent); background: color-mix(in srgb, #fff 80%, transparent); box-shadow: 0 0 0 1px var(--x-rose) inset, 0 6px 14px -6px rgb(96 46 47 / .5); }
+.x-tip h3 { font: 600 clamp(1.1rem, 2.2vw, 1.4rem)/1.15 var(--f-text); letter-spacing: .06em; text-transform: uppercase; }
+.x-tip__note { display: inline-block; font-family: var(--x-script); font-size: 1.35rem; line-height: 1.2; color: var(--c-accent); background: color-mix(in srgb, #fff 62%, var(--x-rose)); padding: 4px 16px 6px; border-radius: 14px; margin-bottom: 10px; transform: rotate(-1.5deg); }
+.x-tip p { color: var(--c-ink-soft); max-width: 34em; }
+.x-tip__pic { position: relative; width: clamp(120px, 18vw, 170px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 14px 28px -12px rgb(96 46 47 / .55); }
+.x-tip__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--x-ease); }
+.x-tip:hover .x-tip__pic img { transform: scale(1.12) rotate(2deg); }
+.x-tip__heart { position: absolute; right: 22px; bottom: 16px; width: 26px; height: 26px; color: var(--x-rose); opacity: .8; }
+.x-tip__heart svg { width: 100%; height: 100%; display: block; animation: x-beat 2.4s ease-in-out infinite; }
+@keyframes x-beat { 50% { transform: scale(1.2); } }
+@media (max-width: 640px) { .x-tip { grid-template-columns: 1fr; } .x-tip__pic { width: 140px; justify-self: start; } .x-tip__num { width: 44px; height: 44px; font-size: 1.4rem; } }
+
+/* ---------- фото в мягких рамках ---------- */
+.s-photos figure > img { border-radius: 24px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .s-btn::after { display: none; } .x-tip__heart svg { animation: none; } .x-tip:hover { transform: none; } }
+
+/* советы: заголовок слева «едет» за прокруткой, карточки справа */
+#tips { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
+#tips .x-tips__title { position: sticky; top: calc(var(--bar-h) + 28px); margin-bottom: 0; }
+@media (max-width: 900px) { #tips { grid-template-columns: 1fr; } #tips .x-tips__title { position: static; margin-bottom: 18px; } }
+/* ---------- 3D-карусель (призма из 8 граней): окрашивания и стрижки ---------- */
+.x-gal__head { max-width: none; }
+.x-gal__hint { font-family: var(--x-script); font-size: 1.45rem; color: var(--c-accent); }
+.x-cube { position: relative; --w: clamp(150px, 21vw, 270px); --h: calc(var(--w) * 1.32); height: calc(var(--h) + 70px); perspective: 1600px; display: grid; place-items: center; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; margin: 0 calc(-1 * var(--gut)); outline: none; }
+.x-cube:active { cursor: grabbing; }
+.x-cube:focus-visible { outline: 2px solid var(--c-accent); outline-offset: -2px; border-radius: 20px; }
+.x-cube__stage { width: var(--w); height: var(--h); position: relative; transform-style: preserve-3d; }
+.x-cube__ring { position: absolute; inset: 0; transform-style: preserve-3d; transform: translateZ(calc(var(--w) * -1.27)) rotateY(var(--rot, 0deg)); transition: transform 1s cubic-bezier(.2, .8, .2, 1); }
+.x-cube__ring.is-drag { transition: none; }
+.x-cube__face { position: absolute; inset: 0; margin: 0; border-radius: 22px; overflow: hidden; transform: rotateY(var(--a)) translateZ(calc(var(--w) * 1.27)); backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: 0 24px 40px -20px rgb(96 46 47 / .55); filter: brightness(.8) saturate(.85); transition: filter .6s; background: #eadad4; }
+.x-cube__face.is-front { filter: none; }
+.x-cube__face img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.x-cube__face figcaption { position: absolute; left: 10px; right: 10px; bottom: 10px; padding: 8px 12px; border-radius: 14px; background: rgb(255 247 244 / .62); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font: 600 .78rem/1.2 var(--f-text); letter-spacing: .04em; color: var(--c-ink); text-align: center; }
+.x-cube__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgb(255 255 255 / .8); background: rgb(255 247 244 / .6); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--c-accent); cursor: pointer; display: grid; place-items: center; box-shadow: 0 10px 24px -10px rgb(96 46 47 / .5); transition: transform .25s var(--x-ease), background .25s; }
+.x-cube__nav svg { width: 22px; height: 22px; }
+.x-cube__nav:hover { transform: translateY(-50%) scale(1.1); background: #fff; }
+.x-cube__nav:active { transform: translateY(-50%) scale(.92); }
+.x-cube__nav--prev { left: clamp(10px, 4vw, 56px); } .x-cube__nav--next { right: clamp(10px, 4vw, 56px); }
+.x-cube__cap { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 14px; text-align: center; }
+.x-cube__cap b { font: italic 600 clamp(1.5rem, 3vw, 2.1rem)/1.1 var(--x-serif); }
+.x-cube__cap span { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--c-ink-soft); }
+.x-cube__dots { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+.x-cube__dot { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 0; background: color-mix(in srgb, var(--c-accent) 28%, transparent); cursor: pointer; transition: transform .3s var(--x-ease), background .3s; }
+.x-cube__dot:hover { transform: scale(1.3); }
+.x-cube__dot.is-on { background: var(--c-accent); transform: scale(1.4); }
+@media (max-width: 640px) { .x-cube { --w: clamp(150px, 54vw, 230px); } .x-cube__nav { width: 42px; height: 42px; } }
+@media (prefers-reduced-motion: reduce) { .x-cube__ring { transition: none; } }

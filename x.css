@@ -1,7 +1,7 @@
 /* Пудра: палитра со скрина (пудровый розовый, крем, розово-коричневый) + изюминки с доски Pinterest */
 :root { --bar-h: 64px; --x-script: "Marck Script", "Cormorant Garamond", cursive; --x-serif: "Cormorant Garamond", Georgia, serif; --x-ease: cubic-bezier(.2, .8, .2, 1); --x-rose: #b87074; --x-glow: color-mix(in srgb, var(--c-accent) 38%, transparent); }
 html { scroll-padding-top: calc(var(--bar-h) + 12px); scroll-behavior: smooth; }
-body { padding-top: var(--bar-h); background: radial-gradient(circle at 85% -5%, #f1bcb4 0, transparent 44%), radial-gradient(circle at 0 30%, #f0d8c8 0, transparent 40%), var(--c-canvas); background-attachment: fixed; }
+body { padding-top: var(--bar-h); background: radial-gradient(circle at 85% -5%, #f1bcb4 0, transparent 44%), radial-gradient(circle at 0 30%, #f0d8c8 0, transparent 40%), var(--c-canvas); }
 
 /* ---------- закреплённое меню ---------- */
 .s-bar { position: fixed; top: 0; left: 0; right: 0; min-height: var(--bar-h); z-index: 60; background: color-mix(in srgb, var(--c-canvas) 72%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); border-bottom: 1px solid var(--hair); }
@@ -120,3 +120,6 @@ body { padding-top: var(--bar-h); background: radial-gradient(circle at 85% -5%,
 .x-cube__dot.is-on { background: var(--c-accent); transform: scale(1.4); }
 @media (max-width: 640px) { .x-cube { --w: clamp(150px, 54vw, 230px); } .x-cube__nav { width: 42px; height: 42px; } }
 @media (prefers-reduced-motion: reduce) { .x-cube__ring { transition: none; } }
+
+/* iOS/touch: fixed background janks, enable only with mouse */
+@media (hover:hover) and (pointer:fine){ body { background-attachment: fixed; } }
